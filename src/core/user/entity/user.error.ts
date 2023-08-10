@@ -1,6 +1,6 @@
 import { IError } from '../../../utils/error';
 
-export type UserError = InvalidUserIdError | InvalidUserNameError;
+export type UserDomainError = InvalidUserIdError | InvalidUserNameError;
 
 export type InvalidUserIdError = IError<'InvalidUserIdError'>;
 export const InvalidUserIdError = {
@@ -15,5 +15,13 @@ export const InvalidUserNameError = {
   new: (message: string): InvalidUserNameError => ({
     message,
     __tag: 'InvalidUserNameError',
+  }),
+};
+
+export type UserRepositoryError = IError<'UserRepositoryError'>;
+export const UserRepositoryError = {
+  new: (message: string): UserRepositoryError => ({
+    message,
+    __tag: 'UserRepositoryError',
   }),
 };
