@@ -1,5 +1,7 @@
 import { IError } from '../../../utils/error';
 
+export type UserError = InvalidUserIdError | InvalidUserNameError;
+
 export type InvalidUserIdError = IError<'InvalidUserIdError'>;
 export const InvalidUserIdError = {
   new: (message: string): InvalidUserIdError => ({
