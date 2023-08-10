@@ -1,4 +1,4 @@
-import { mkUser } from './user.entity';
+import { mkUser } from './user';
 import { v4 as genUUID } from 'uuid';
 import { right, left } from 'fp-ts/lib/Either';
 
