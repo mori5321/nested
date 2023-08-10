@@ -1,18 +1,11 @@
-import { getSemigroup } from 'fp-ts/lib/Array';
 import { Flavor } from '../../../utils/flavor';
-import * as E from 'fp-ts/lib/Either';
+import { validation, lift } from '../../../utils/validation';
 import { Either, right, left } from 'fp-ts/lib/Either';
-import { pipe } from 'fp-ts/lib/function';
-import { sequenceS } from 'fp-ts/lib/Apply';
 
-type Validation<E, A> = E.Either<E[], A>;
-const lift: <E, A>(body: Either<E, A>) => Validation<E, A> = (body) =>
-  pipe(
-    body,
-    E.mapLeft((a) => [a]),
-  );
-
-const getValidation = <T>() => E.getApplicativeValidation(getSemigroup<T>());
+export type User = {
+  id: UserId;
+  name: UserName;
+};
 
 type UserId = Flavor<string, 'UserId'>;
 type UserName = Flavor<string, 'UserName'>;
@@ -70,13 +63,8 @@ const mkUserName = (name: string): Either<InvalidUserNameError, UserName> => {
 };
 
 export const mkUser = (id: string, name: string): Either<UserError[], User> => {
-  return sequenceS(getValidation<UserError>())({
+  return validation<UserError>()({
     id: lift(mkUserId(id)),
     name: lift(mkUserName(name)),
   });
-};
-
-export type User = {
-  id: UserId;
-  name: UserName;
 };
