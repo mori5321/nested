@@ -1,6 +1,8 @@
 import { IError } from '../../../utils/error';
 
+export type UserError = UserDomainError | UserInfraError;
 export type UserDomainError = InvalidUserIdError | InvalidUserNameError;
+export type UserInfraError = UserRepositoryError;
 
 export type InvalidUserIdError = IError<'InvalidUserIdError'>;
 export const InvalidUserIdError = {

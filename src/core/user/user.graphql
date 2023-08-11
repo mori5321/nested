@@ -1,0 +1,20 @@
+type User {
+  id: ID!
+  name: String!
+}
+
+union UsersPayload = UsersSuccess | UsersError
+
+type UsersSuccess {
+  users: [User!]
+}
+
+type UsersError {
+  errors: [String!]
+}
+
+type Query {
+  hello: String!
+  user(id: ID!): User
+  users: UsersPayload
+}
