@@ -22,7 +22,6 @@ export interface UsersError {
 }
 
 export interface IQuery {
-    hello(): string | Promise<string>;
     user(id: string): Nullable<User> | Promise<Nullable<User>>;
     users(): Nullable<UsersPayload> | Promise<Nullable<UsersPayload>>;
 }
